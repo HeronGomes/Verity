@@ -1,12 +1,15 @@
+#utils/utils
 from typing_extensions import TypedDict
-from typing import Annotated
-from langgraph.graph.message import AnyMessage, add_messages
 from langchain_core.messages import AIMessage
 from pydantic import BaseModel
 from typing import Optional
 
 class State(TypedDict):
-    messages: Annotated[list[AnyMessage], add_messages]
+    question: str
+    reponse: str
+    error: bool
+    sql: str
+    sql_content:str
 
 class ModelResponse(BaseModel):
     message: Optional[str] = None  # Mensagem opcional para o sucesso

@@ -1,3 +1,4 @@
+#main.py
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 from middleware.langchain_sql_middleware import LangChainSQLMiddleware
@@ -16,7 +17,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # Defina origens específicas em produção
     allow_credentials=True,
-    allow_methods=["POST"],
+    allow_methods=["POST","GET"],
     allow_headers=["*"],
 )
 

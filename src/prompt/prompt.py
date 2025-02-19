@@ -1,4 +1,4 @@
-prompt_sql = """You are a SQL expert with a strong attention to detail.
+natural_language2sql_prompt = """You are a SQL expert with a strong attention to detail.
 Double check the SQLite query for common mistakes, including:
 - Using NOT IN with NULL values
 - Using UNION when UNION ALL should have been used
@@ -23,7 +23,7 @@ Translate this human sentence above to sql query:
 
 """
 
-prompt_translate = """You are a SQL expert with a strong attention to detail.
+sql2natural_language_prompt = """You are a SQL expert with a strong attention to detail.
 
 Given an sql query, output a syntactically correct postgree query to run, then look at the results of the query and return the answer.
 
@@ -53,4 +53,21 @@ SQL Response: {response}
 - Use accessible and common language .
 - Interpret the result and write a friendly response.
 - Not making technical references in responses,e.g: database, query, programing, i.a, etc.
+"""
+
+
+sql_agent_fixer_prompt = """
+
+You are a postgree expert senior.
+Your task is to fix sql postgre sintaxe, given a Postgres database schema and query with erros and question to make a new query.
+
+Schema:
+{schema}
+
+Question: {question}
+
+SQL Bad Query: {query}
+
+Reponse only with new query.
+
 """

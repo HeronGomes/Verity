@@ -11,17 +11,23 @@ class OllamaMiddleware(BaseHTTPMiddleware):
     def __init__(self, app):
         super().__init__(app)
         # Carrega o modelo apenas uma vez para melhorar a eficiência
-        model_name = os.getenv("OLLAMA_MODEL")
-        if not model_name:
+        chat_model = os.getenv("CHAT_OLLAMA_MODEL")
+        if not chat_model:
             raise RuntimeError("Variável de ambiente 'OLLAMA_MODEL' não encontrada.")
         
+        fix_sql_model = os.getenv("SQL_FIX_OLLAMA_MODEL")
+        if not fix_sql_model:
+            raise RuntimeError("Variável de ambiente 'SQL_FIX_OLLAMA_MODEL' não encontrada.")
+        
         # Inicializa o LLM com o modelo
-        self.llm = ChatOllama(model=model_name, temperature=0)
+        self.chat_llm = ChatOllama(model=chat_model, temperature=0.5)
+        self.fix_sql_llm = ChatOllama(model=fix_sql_model, temperature=0)
 
     async def dispatch(self, request: Request, call_next):
         try:
             # Atribui o LLM ao estado da requisição
-            request.state.llm = self.llm
+            request.state.chat_llm = self.chat_llm
+            request.state.fix_sql_llm = self.fix_sql_llm
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Erro ao inicializar o agente SQL: {str(e)}")
         
