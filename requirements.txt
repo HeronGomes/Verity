@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+python-dotenv
+langchain
+psycopg-binary
+SQLAlchemy
+langchain-ollama
+psycopg_pool
+langchain-community 
+Langchainhub
