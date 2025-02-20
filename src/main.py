@@ -4,12 +4,24 @@ from starlette.middleware.cors import CORSMiddleware
 from middleware.langchain_sql_middleware import LangChainSQLMiddleware
 from middleware.ollama_middleware import OllamaMiddleware
 from route.routes import router as query_router
+import subprocess
+
+def get_git_version():
+    '''
+        Obtem a versão da API baseada no commit, se ocorrer padrão de tags, retorna o valor.
+    '''
+    try:
+        version = subprocess.check_output(["git", "describe", "--tags", "--always"]).strip().decode('utf-8')
+        return version
+    except Exception as e:
+        return "1.0.0"
+
 
 # Cria a instância da aplicação FastAPI
 app = FastAPI(
     title="Verity API",
-    description="API para processamento de linguagem natural com SQL e Ollama.",
-    version="1.0.0"
+    description="API desenvolvida com motor de gen a.i capaz de interpretar sql a partir de linguagem natural.",
+    version=get_git_version()
 )
 
 # Middleware de CORS para permitir requisições de diferentes origens

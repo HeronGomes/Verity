@@ -58,3 +58,43 @@ as interações do usuário com o chat.
 - Devido a limitação de RAM do host, optou-se por carregar modelos menores (e menos inteligentes) para a execução da tarefa, mas, nada impede a mudança para qualquer outro modelo que seja compativel (*vide documentação do modelo sobre compatibilidade com tools*).
 - Não há implementação de ***guardrails*** ou recursos que garantam a boa interação do usuário com o chat ou mesmo o processo contrário.
 - Erros de SQL e alucinações em querys complexas são esperados.
+
+
+### Evidências
+
++ Acesso à Rota Inicial:
+
+<img src="artifacts\logo.png" width="800">
+
++ Input da mensagem
+
+<img src="artifacts\pergunta.png" width="800">
+
++ Resposta do Sistema
+
+<img src="artifacts\resposta.png" width="800">
+
++ Checagem da resposta
+
+<img src="artifacts\evidencia.png" width="800">
+
+### Base de dados
+
++ Tabela Clientes
+<img src="artifacts\tb_clientes.png" width="800" height="300">
+
++ Tabela Produtos
+<img src="artifacts\tb_produtos.png" width="800" height="300">
+
++ Tabela Transações
+<img src="artifacts\tb_transacoes.png" width="800" height="300">
+
+
++ Diagrama do Banco
+<img src="artifacts\DIAGRAMA_ER_BANCO.png" width="800" height="300">
+
+
+### Fluxo Básico do sistema (chain)
+<p align="center">
+    <img src="artifacts\LANG_GRAPH.png" width="400" height="300" alingn='center'>
+</p>

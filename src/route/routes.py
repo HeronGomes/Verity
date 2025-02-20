@@ -68,11 +68,10 @@ V::::::V           V::::::VEE::::::EEEEEEEEE::::ERR:::::R     R:::::RII::::::IIT
 @router.post("/ollama_ask",tags=['DEBUG'])
 async def ollama_ask(request: Request, question: str = Form(...)):
     """
-    Rota que recebe uma pergunta em linguagem natural e utiliza o controller
-    para convertê-la em uma consulta processada por um LLM.
+    Rota Utilizada para testar o modelo carregado no ollama.
     
     Parâmetros:
-    - question: A pergunta em linguagem natural que será convertida.
+    - question: A pergunta em linguagem natural.
     
     Retorna:
     - O resultado processado pelo LLM, no formato JSON.
@@ -86,7 +85,7 @@ async def ollama_ask(request: Request, question: str = Form(...)):
         
         return JSONResponse(
             status_code=200,
-            content=ModelResponse(message=result['sql_content']).dict()
+            content=ModelResponse(message=result).dict()
         )
 
     except Exception as e:
@@ -98,11 +97,12 @@ async def ollama_ask(request: Request, question: str = Form(...)):
 
 
 
-@router.post("/ask")
+@router.post("/ask",tags=['DEV'])
 async def ask(request: Request, question: str = Form(...)):
     """
-    Rota que recebe uma pergunta em linguagem natural e utiliza o controller
-    para convertê-la em uma consulta processada por um LLM.
+    Rota que recebe uma pergunta em linguagem natural,
+    converte para cláusulas SQL, executa a query gerada,
+    retorna e interpreta o resultado.
     
     Parâmetros:
     - question: A pergunta em linguagem natural que será convertida.
